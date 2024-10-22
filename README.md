@@ -1,1 +1,1 @@
-# ESPHomeGrinder
+# ESPHomeCoffeeAssistant
