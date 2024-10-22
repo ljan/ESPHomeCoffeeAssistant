@@ -1,5 +1,8 @@
 #pragma once
 
+#include "esphome/core/component.h" // Include ESPHome's core component
+#include "esphome/core/hal.h"       // For ESPHome hardware abstraction
+
 #include "esphome.h"
 #include <TTBOUNCE.h>
 
