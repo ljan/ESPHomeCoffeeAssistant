@@ -1,9 +1,6 @@
 #include "GrinderComponent.h"
 #include "esphome/core/log.h"
 
-namespace esphome {
-namespace grinder {
-
 // Constructor
 GrinderComponent::GrinderComponent() : grinder_state_(GRINDER_IDLE), grind_start_time_(0) {}
 
@@ -114,6 +111,3 @@ void GrinderComponent::timer_callback() {
   ESP_LOGD(TAG, "Timer has expired, stopping grinder.");
   this->stop_grinding();
 }
-
-}  // namespace grinder
-}  // namespace esphome
