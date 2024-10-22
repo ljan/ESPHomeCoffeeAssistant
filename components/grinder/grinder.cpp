@@ -1,4 +1,4 @@
-#include "GrinderComponent.h"
+#include "grinder.h"
 #include "esphome/core/log.h"
 
 namespace esphome {
