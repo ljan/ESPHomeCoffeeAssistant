@@ -3,9 +3,6 @@
 #include "esphome.h"
 #include <TTBOUNCE.h>
 
-namespace esphome {
-namespace grinder {
-
 enum GrinderState {
   GRINDER_IDLE,
   GRINDER_SINGLE,
@@ -52,6 +49,3 @@ class GrinderComponent : public Component {
   void double_click();
   void press();
 };
-
-}  // namespace grinder
-}  // namespace esphome
