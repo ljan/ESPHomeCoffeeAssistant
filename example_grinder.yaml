@@ -1,14 +1,42 @@
-esphome:
-  name: grinder_machine
-
 external_components:
-  - source: custom_components/grinder
+  - source: ./custom_components/grinder
+
+globals:
+  - id: single_grind_time
+    type: int
+    initial_value: 12000
+  - id: double_grind_time
+    type: int
+    initial_value: 25000
 
 custom_component:
   - platform: grinder
-    id: my_grinder
-    button_pin: 14
-    grinder_pin: 12
-    max_grind_time: 600000
-    single_grind_time: 12000
-    double_grind_time: 25000
+    id: grinder_1
+    button_pin: 5
+    grinder_pin: 14
+    max_grind_time: 600000  # 10 Minuten
+    single_grind_time: !lambda 'return id(single_grind_time);'
+    double_grind_time: !lambda 'return id(double_grind_time);'
+
+sensor:
+  - platform: template
+    name: "Single Grind Time"
+    id: single_grind_time_sensor
+    update_interval: 10s
+    lambda: |-
+      return id(single_grind_time);
+    on_value:
+      then:
+        - lambda: |-
+            id(grinder_1).set_single_grind_time(x);
+
+  - platform: template
+    name: "Double Grind Time"
+    id: double_grind_time_sensor
+    update_interval: 10s
+    lambda: |-
+      return id(double_grind_time);
+    on_value:
+      then:
+        - lambda: |-
+            id(grinder_1).set_double_grind_time(x);

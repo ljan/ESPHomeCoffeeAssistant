@@ -135,6 +135,14 @@ void GrinderComponent::handle_manual_grind() {
   }
 }
 
+void GrinderComponent::set_single_grind_time(int single_grind_time) {
+  this->single_grind_time_ = single_grind_time;
+}
+
+void GrinderComponent::set_double_grind_time(int double_grind_time) {
+  this->double_grind_time_ = double_grind_time;
+}
+
 void GrinderComponent::handle_save_single() {
   ESP_LOGD(TAG, "Handling save single grind.");
   if (this->button_.read() == LOW) {

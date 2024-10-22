@@ -21,12 +21,31 @@ class GrinderComponent : public Component {
   void loop() override;
   void dump_config() override;
 
+  void set_single_grind_time(int single_grind_time) {
+    this->single_grind_time_ = single_grind_time;
+  }
+  
+  void set_double_grind_time(int double_grind_time) {
+    this->double_grind_time_ = double_grind_time;
+  }
+
+  int get_single_grind_time() const {
+    return this->single_grind_time_;
+  }
+  
+  int get_double_grind_time() const {
+    return this->double_grind_time_;
+  }
+
  protected:
   static void static_timer_callback(void* p_arg);
   void single_click();
   void double_click();
   void press();
   void timer_callback();
+
+  int single_grind_time_;
+  int double_grind_time_;
 
  private:
   int button_pin_;
