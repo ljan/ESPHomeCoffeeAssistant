@@ -1,22 +1,26 @@
 external_components:
-  - source: ./custom_components/grinder
+  - source:
+      type: git
+      url: https://github.com/ljan/ESPHomeCoffeeAssistant
 
 globals:
   - id: single_grind_time
     type: int
-    initial_value: 12000
+    initial_value: '12000'
   - id: double_grind_time
     type: int
-    initial_value: 25000
+    initial_value: '25000'
 
 custom_component:
-  - platform: grinder
-    id: grinder_1
-    button_pin: 5
-    grinder_pin: 14
-    max_grind_time: 600000  # 10 Minuten
-    single_grind_time: !lambda 'return id(single_grind_time);'
-    double_grind_time: !lambda 'return id(double_grind_time);'
+  - id: grinder
+    lambda: |-
+      auto grinder = new GrinderComponent();
+      grinder->set_button_pin(5);
+      grinder->set_grinder_pin(14);
+      grinder->set_max_grind_time(600000);  // 10 minutes
+      grinder->set_single_grind_time(id(single_grind_time));  // Pass global variable
+      grinder->set_double_grind_time(id(double_grind_time));  // Pass global variable
+      return {grinder};
 
 sensor:
   - platform: template
@@ -28,7 +32,7 @@ sensor:
     on_value:
       then:
         - lambda: |-
-            id(grinder_1).set_single_grind_time(x);
+            id(grinder).set_single_grind_time(x);
 
   - platform: template
     name: "Double Grind Time"
@@ -39,4 +43,4 @@ sensor:
     on_value:
       then:
         - lambda: |-
-            id(grinder_1).set_double_grind_time(x);
+            id(grinder).set_double_grind_time(x);
