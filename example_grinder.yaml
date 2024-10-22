@@ -1,0 +1,14 @@
+esphome:
+  name: grinder_machine
+
+external_components:
+  - source: custom_components/grinder
+
+custom_component:
+  - platform: grinder
+    id: my_grinder
+    button_pin: 14
+    grinder_pin: 12
+    max_grind_time: 600000
+    single_grind_time: 12000
+    double_grind_time: 25000
